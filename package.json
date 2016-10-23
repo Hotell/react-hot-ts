@@ -21,18 +21,17 @@
     "webpack-dev-server": "2.1.0-beta.9"
   },
   "scripts": {
-    "dev": "webpack-dev-server --env.dev --hot",
-    "start": "node server.js",
+    "start": "webpack-dev-server --env.dev --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Glavin001/react-hot-ts.git"
+    "url": "git+https://github.com/Hotell/react-hot-ts.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Glavin001/react-hot-ts/issues"
+    "url": "https://github.com/Hotell/react-hot-ts/issues"
   },
-  "homepage": "https://github.com/Glavin001/react-hot-ts#readme"
+  "homepage": "https://github.com/Hotell/react-hot-ts#readme"
 }
