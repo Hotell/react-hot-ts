@@ -2,6 +2,8 @@ const webpack = require( "webpack" );
 const path = require( 'path' );
 const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = ( env ) => {
 
   const { ifProd, ifNotProd } = getIfUtils(env);
@@ -14,7 +16,7 @@ module.exports = ( env ) => {
     ],
     output: {
       path: path.join( __dirname, 'dist' ),
-      filename: 'bundle.js',
+      filename: '[name]-[hash].js',
       // Include comments with information about the modules.
       pathinfo: ifNotProd(),
       // publicPath: "/",
@@ -34,6 +36,9 @@ module.exports = ( env ) => {
     },
 
     plugins: [
+      new HtmlWebpackPlugin({
+        template: path.resolve('index.html')
+      }),
       // Set NODE_ENV to enable production react version
       new webpack.DefinePlugin({
         'process.env': {
