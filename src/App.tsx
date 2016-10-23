@@ -17,13 +17,15 @@ export default class App extends React.Component<any, State> {
     return (
       <div>
         <h1>Hello world!</h1>
-        <div>Welcome to hot-reloading React written in TypeScript!</div>
-        <button onClick={
+        <div>Welcome to <b>hot-reloading React</b> written in TypeScript!</div>
+        <button
+          onClick={
                     (evt)=>{
                         evt.preventDefault();
                         this.handleClick();
                     }
-                }>
+                }
+        >
           Click Me!
         </button>
         <div>

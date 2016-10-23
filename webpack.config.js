@@ -1,5 +1,5 @@
 const webpack = require( "webpack" );
-const path = require( "path" );
+const path = require( 'path' );
 const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 
 module.exports = ( env ) => {
@@ -7,14 +7,16 @@ module.exports = ( env ) => {
   const { ifProd, ifNotProd } = getIfUtils(env);
   return {
     entry: [
-      "react-hot-loader/patch",
+      ifNotProd( 'react-hot-loader/patch' ),
       // "webpack-dev-server/client?http://localhost:8080",
       // "webpack/hot/only-dev-server",
-      "./src/index.tsx",
+      './src/index.tsx',
     ],
     output: {
       path: path.join( __dirname, 'dist' ),
       filename: 'bundle.js',
+      // Include comments with information about the modules.
+      pathinfo: ifNotProd(),
       // publicPath: "/",
     },
 
@@ -32,20 +34,23 @@ module.exports = ( env ) => {
     },
 
     plugins: [
-      new webpack.DefinePlugin(
-        { 'process.env': { 'NODE_ENV': JSON.stringify( 'production' ) } } ),
+      // Set NODE_ENV to enable production react version
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: ifProd('"production"', '"development"')
+        }
+      }),
       new webpack.NamedModulesPlugin(),
       // new webpack.HotModuleReplacementPlugin(),
     ],
 
     module: {
       rules: [
-        // All output '.js' files will have any sourcemaps re-processed by
-        // 'source-map-loader'.
+        // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
         {
           test: /\.js$/,
           enforce: 'pre',
-          use: "source-map-loader"
+          use: 'source-map-loader'
         },
         // All files with a '.ts' or '.tsx' extension will be handled by
         // 'ts-loader'.
@@ -53,10 +58,10 @@ module.exports = ( env ) => {
           test: /\.tsx?$/,
           use: [
             // "react-hot-loader/webpack",
-            "awesome-typescript-loader"
+            'awesome-typescript-loader'
           ],
           // exclude: path.resolve( __dirname, 'node_modules' ),
-          include: path.resolve( __dirname, "src" ),
+          // include: path.resolve( __dirname, "src" ),
         }
       ]
     },
