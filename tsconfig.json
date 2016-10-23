@@ -1,18 +1,20 @@
 {
-    "compilerOptions": {
-        "outDir": "./dist/",
-        "sourceMap": true,
-        "noImplicitAny": true,
-        "module": "commonjs",
-        "target": "es5",
-        "jsx": "react"
-    },
-    "files": [
-        "./declarations.d.ts",
-        "./src/components/Hello.tsx",
-        "./src/index.tsx"
-    ],
-    "exclude": [
-        "node_modules"
+  "compilerOptions": {
+    "module": "es2015",
+    "target": "es5",
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "jsx": "react",
+    "pretty": true,
+    "lib": [
+      "es5",
+      "es2015.promise",
+      "dom"
     ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }
