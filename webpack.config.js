@@ -23,19 +23,19 @@ module.exports = ( env ) => {
     },
 
     // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
-//   devServer: {
-//       hot: true,
-//       historyApiFallback: true,
-//       publicPath: "/"
-//     },
+    devtool: ifProd( 'source-map', 'eval-source-map' ),
+    devServer: ifNotProd( {
+      hot: true,
+      historyApiFallback: true,
+      // publicPath: '/'
+    } ),
 
     resolve: {
       // Add '.ts' and '.tsx' as resolvable extensions.
       extensions: [ ".ts", ".tsx", ".js" ]
     },
 
-    plugins: [
+    plugins: removeEmpty([
       new HtmlWebpackPlugin({
         template: path.resolve('index.html')
       }),
@@ -45,9 +45,9 @@ module.exports = ( env ) => {
           NODE_ENV: ifProd('"production"', '"development"')
         }
       }),
-      new webpack.NamedModulesPlugin(),
-      // new webpack.HotModuleReplacementPlugin(),
-    ],
+      ifNotProd( new webpack.NamedModulesPlugin() ),
+      ifNotProd( new webpack.HotModuleReplacementPlugin() ),
+    ]),
 
     module: {
       rules: [
@@ -57,8 +57,6 @@ module.exports = ( env ) => {
           enforce: 'pre',
           use: 'source-map-loader'
         },
-        // All files with a '.ts' or '.tsx' extension will be handled by
-        // 'ts-loader'.
         {
           test: /\.tsx?$/,
           use: [

@@ -21,7 +21,7 @@
     "webpack-dev-server": "2.1.0-beta.9"
   },
   "scripts": {
-    "start": "webpack-dev-server --env.dev --hot",
+    "start": "webpack-dev-server --env.dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
